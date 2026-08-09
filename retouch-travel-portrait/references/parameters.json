@@ -1,0 +1,89 @@
+{
+  "schema_version": 3,
+  "preset_name": "natural-v3",
+  "engine": {
+    "name": "deterministic-raster-v3",
+    "model_calls": 0,
+    "required_python_packages": ["Pillow", "numpy"]
+  },
+  "scope": {
+    "primary_faces": 1,
+    "supported_extensions": [".jpg", ".jpeg", ".png", ".webp"],
+    "unsupported_edits": [
+      "face swapping",
+      "apparent-age change",
+      "face reshaping",
+      "eye resizing",
+      "nose reshaping",
+      "lip reshaping",
+      "body reshaping",
+      "heavy makeup",
+      "background replacement",
+      "under-eye editing"
+    ]
+  },
+  "parameters": {
+    "lighting_improvement": {
+      "stage": "lighting",
+      "operation": "bounded_global_tone",
+      "default": 0.25,
+      "minimum": 0.0,
+      "maximum": 0.5
+    },
+    "skin_smoothing": {
+      "stage": "skin",
+      "operation": "edge_protected_skin_smoothing",
+      "default": 0.2,
+      "minimum": 0.0,
+      "maximum": 0.5
+    },
+    "blemish_reduction": {
+      "stage": "skin",
+      "operation": "temporary_redness_reduction",
+      "default": 0.2,
+      "minimum": 0.0,
+      "maximum": 0.4
+    },
+    "skin_tone_evenness": {
+      "stage": "skin",
+      "operation": "low_frequency_skin_tone_blend",
+      "default": 0.15,
+      "minimum": 0.0,
+      "maximum": 0.4
+    },
+    "under_eye_reduction": {
+      "stage": "deferred",
+      "operation": "unsupported_in_v3",
+      "default": 0.0,
+      "minimum": 0.0,
+      "maximum": 0.0
+    }
+  },
+  "locks": [
+    "Never resample, resize, crop, rotate, translate, or reframe the image.",
+    "Never modify face or body geometry, expression, pose, clothing, objects, or background structure.",
+    "Preserve the encoded width, height, orientation, and alpha channel exactly.",
+    "Apply the skin stage only through a feathered color mask with edge protection and a bounded spatial rescue when the base mask is too broad.",
+    "Keep edits conservative and preserve pores, fine lines, moles, freckles, scars, and natural highlights.",
+    "Do not whiten skin, add makeup, add objects, remove objects, or invoke a generative image model."
+  ],
+  "quality_limits": {
+    "lighting_mean_absolute_channel_delta_max": 24.0,
+    "skin_mean_absolute_channel_delta_max": 8.0,
+    "skin_changed_pixel_fraction_max": 0.65
+  },
+  "workflow": {
+    "stage_order": ["lighting", "skin"],
+    "maximum_edit_passes": 2,
+    "maximum_retries_per_stage": 0,
+    "preserve_original": true,
+    "keep_intermediates": true,
+    "output_format": "png"
+  },
+  "batch": {
+    "continue_on_item_error": true,
+    "preserve_per_item_runs": true,
+    "write_machine_readable_summary": true,
+    "default_recursive": false
+  }
+}

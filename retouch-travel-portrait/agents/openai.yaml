@@ -1,0 +1,4 @@
+interface:
+  display_name: "Travel Portrait Retouch V6"
+  short_description: "完整八阶段人像修图与十项自审"
+  default_prompt: "Use $retouch-travel-portrait to run the complete ordered retouch pipeline on this portrait and finish all ten self-audit checks."

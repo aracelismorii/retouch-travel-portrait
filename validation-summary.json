@@ -1,0 +1,227 @@
+{
+  "schema_version": 1,
+  "artifact": "retouch-travel-portrait-v6-focused-natural-validation",
+  "skill_version": "v0.7.0-beta",
+  "mode": "natural",
+  "verification_date": "2026-08-09",
+  "verification_scope": {
+    "runs": 12,
+    "input_contract": "single-frame supported portraits that passed V6 preflight",
+    "state_validation": "pipeline_state.py validate succeeded independently for all 12 run directories",
+    "sample_limitations": [
+      "Focused 12-image set; not a statistically representative benchmark.",
+      "No blinded preference study or independent identity-similarity study was performed.",
+      "The validation demonstrates review-gated workflow behavior, not unattended production readiness.",
+      "Candidate acceptance is not the same metric as perceptible improvement or general success rate."
+    ]
+  },
+  "workflow_completion": {
+    "total_runs": 12,
+    "complete": 12,
+    "safe_but_subtle": 0,
+    "partial_v3_fallback": 0,
+    "failed": 0,
+    "awaiting_review": 0,
+    "prepared": 0,
+    "sample_completion_rate": 1.0,
+    "generalized_success_rate_claimed": false
+  },
+  "candidate_review": {
+    "generated_local_deterministic_candidates": 36,
+    "accepted_after_visual_review": 33,
+    "rejected_and_rolled_back": 1,
+    "no_pixel_change": 2,
+    "accepted_candidate_rate": 0.916667,
+    "accepted_candidate_rate_percent": 91.7,
+    "interpretation": "33/36 generated local candidates were accepted. This is a candidate-level result on this sample and must not be presented as a general image-level success rate."
+  },
+  "stage_summary": [
+    {
+      "stage": "photo_correction",
+      "final_status_counts": {"accepted": 0, "no_change": 12, "rejected": 0},
+      "candidate_counts": {"generated": 0, "accepted": 0, "rejected": 0, "no_pixel_change": 0}
+    },
+    {
+      "stage": "light_balance",
+      "final_status_counts": {"accepted": 12, "no_change": 0, "rejected": 0},
+      "candidate_counts": {"generated": 12, "accepted": 12, "rejected": 0, "no_pixel_change": 0},
+      "accepted_candidate_rate": 1.0
+    },
+    {
+      "stage": "color_balance",
+      "final_status_counts": {"accepted": 11, "no_change": 1, "rejected": 0},
+      "candidate_counts": {"generated": 12, "accepted": 11, "rejected": 0, "no_pixel_change": 1},
+      "accepted_candidate_rate": 0.916667
+    },
+    {
+      "stage": "skin_cleanup",
+      "final_status_counts": {"accepted": 10, "no_change": 2, "rejected": 0},
+      "candidate_counts": {"generated": 12, "accepted": 10, "rejected": 1, "no_pixel_change": 1},
+      "accepted_candidate_rate": 0.833333,
+      "note": "The final no_change count includes one zero-pixel candidate and one explicit rejection followed by rollback."
+    },
+    {
+      "stage": "facial_features",
+      "final_status_counts": {"accepted": 0, "no_change": 12, "rejected": 0},
+      "candidate_counts": {"generated": 0, "accepted": 0, "rejected": 0, "no_pixel_change": 0}
+    },
+    {
+      "stage": "hair_clothing",
+      "final_status_counts": {"accepted": 0, "no_change": 12, "rejected": 0},
+      "candidate_counts": {"generated": 0, "accepted": 0, "rejected": 0, "no_pixel_change": 0}
+    },
+    {
+      "stage": "background",
+      "final_status_counts": {"accepted": 0, "no_change": 12, "rejected": 0},
+      "candidate_counts": {"generated": 0, "accepted": 0, "rejected": 0, "no_pixel_change": 0}
+    },
+    {
+      "stage": "final_review",
+      "final_status_counts": {"accepted": 12, "no_change": 0, "rejected": 0},
+      "candidate_counts": {"generated": 0, "accepted": 0, "rejected": 0, "no_pixel_change": 0}
+    }
+  ],
+  "audit_results": {
+    "audit_decisions": {"accept": 12, "reject": 0, "visual_review_required": 0},
+    "automated_precheck": {"pass_with_review": 12, "hard_rejects": 0, "review_flags": 0},
+    "automatic_check_statuses": {"pass": 36, "not_evaluable": 84, "fail": 0},
+    "manual_check_statuses": {"pass": 111, "not_applicable": 9, "fail": 0},
+    "resolved_check_statuses": {"pass": 111, "not_applicable": 9, "fail": 0},
+    "manual_review_complete_runs": 12,
+    "may_auto_accept_runs": 0,
+    "interpretation": "All 12 audits accepted only after proof-bound manual review. The automatic layer did not and cannot auto-accept these runs."
+  },
+  "model_usage": {
+    "recorded_model_calls": 0,
+    "model_events": 0,
+    "queue_runner_model_calls": 0,
+    "path_used": "local_deterministic_only"
+  },
+  "geometry_and_canvas": {
+    "candidate_reviews": 36,
+    "candidate_geometry_gate_accept": 36,
+    "candidate_exact_dimension_matches": 36,
+    "candidate_relative_aspect_ratio_delta_min": 0.0,
+    "candidate_relative_aspect_ratio_delta_max": 0.0,
+    "final_exact_dimension_matches": 12,
+    "final_relative_aspect_ratio_delta_max": 0.0,
+    "observed_stretch_or_canvas_failure": 0
+  },
+  "proof_results": {
+    "verified_current_manifests": 12,
+    "manifest_schema_version": 2,
+    "generator": "portrait-retouch-render-proof-v6",
+    "proof_files_per_run": 5,
+    "bound_views_per_run": 6,
+    "detail_crop_pixels": 512,
+    "focus_points_per_run": 2,
+    "focus_roles": ["skin_density_primary", "upper_center_fallback"],
+    "state_and_hash_revalidation_passed": 12,
+    "focus_repair_status": {
+      "status": "functional_with_known_heuristic_limit",
+      "manual_v2_sheet_result": "A face/eye/skin review area was available in the dual-focus detail proof for all 12 cases.",
+      "primary_focus_misses_observed": 5,
+      "primary_focus_miss_cases": ["case-04", "case-05", "case-07", "case-10", "case-11"],
+      "mitigation": "The upper-center fallback supplied the reviewable facial detail for the observed primary-focus misses.",
+      "limit": "The skin-density primary point is not a semantic face detector and should not be used without the fallback and visual review."
+    }
+  },
+  "perceptible_improvement": {
+    "separately_scored": false,
+    "blinded_preference_test_performed": false,
+    "finals_with_nonzero_measured_change": 12,
+    "rgb_mae_range": [0.00193957, 0.010891],
+    "rgb_mae_mean": 0.0073878492,
+    "luma_mae_range": [0.00195392, 0.00888173],
+    "luma_mae_mean": 0.0060530158,
+    "luma_correlation_range": [0.99986434, 0.99996717],
+    "interpretation": "Changes are deliberately small and mostly require side-by-side or difference-proof inspection. The evidence supports restrained natural processing, but not a numeric perceptible-improvement rate."
+  },
+  "special_cases": {
+    "case-07": {
+      "description": "black-and-white portrait",
+      "light_balance": "accepted_after_visual_review",
+      "color_balance": "no_pixel_change",
+      "skin_cleanup": "no_pixel_change",
+      "final_rgb_mae_vs_original": 0.00468444,
+      "clarification": "Color and skin stages were zero-change; the complete run was not globally zero-change because a restrained light adjustment was accepted."
+    },
+    "case-08": {
+      "description": "outdoor cherry-blossom portrait",
+      "skin_cleanup": "rejected_and_rolled_back",
+      "rejection_reason": "The color-mask change extended beyond face and hands into pink blossoms and other non-skin regions.",
+      "rollback_verified": true,
+      "final_equals_color_balance_checkpoint": true,
+      "rejected_candidate_used_in_final": false
+    }
+  },
+  "runs": [
+    {
+      "id": "case-01", "status": "complete", "dimensions": [1600, 2400], "final_aspect_ratio_delta": 0.0,
+      "stages": {"photo_correction": "no_change", "light_balance": "accepted", "color_balance": "accepted", "skin_cleanup": "accepted", "facial_features": "no_change", "hair_clothing": "no_change", "background": "no_change", "final_review": "accepted"},
+      "audit": "accept", "proof_verified": true, "model_calls": 0, "rgb_mae": 0.00993359, "luma_mae": 0.00826846
+    },
+    {
+      "id": "case-02", "status": "complete", "dimensions": [1600, 1067], "final_aspect_ratio_delta": 0.0,
+      "stages": {"photo_correction": "no_change", "light_balance": "accepted", "color_balance": "accepted", "skin_cleanup": "accepted", "facial_features": "no_change", "hair_clothing": "no_change", "background": "no_change", "final_review": "accepted"},
+      "audit": "accept", "proof_verified": true, "model_calls": 0, "rgb_mae": 0.00842727, "luma_mae": 0.00708067
+    },
+    {
+      "id": "case-03", "status": "complete", "dimensions": [1600, 2400], "final_aspect_ratio_delta": 0.0,
+      "stages": {"photo_correction": "no_change", "light_balance": "accepted", "color_balance": "accepted", "skin_cleanup": "accepted", "facial_features": "no_change", "hair_clothing": "no_change", "background": "no_change", "final_review": "accepted"},
+      "audit": "accept", "proof_verified": true, "model_calls": 0, "rgb_mae": 0.00718117, "luma_mae": 0.00628016
+    },
+    {
+      "id": "case-04", "status": "complete", "dimensions": [1600, 2217], "final_aspect_ratio_delta": 0.0,
+      "stages": {"photo_correction": "no_change", "light_balance": "accepted", "color_balance": "accepted", "skin_cleanup": "accepted", "facial_features": "no_change", "hair_clothing": "no_change", "background": "no_change", "final_review": "accepted"},
+      "audit": "accept", "proof_verified": true, "model_calls": 0, "rgb_mae": 0.00552773, "luma_mae": 0.00546315
+    },
+    {
+      "id": "case-05", "status": "complete", "dimensions": [1600, 2400], "final_aspect_ratio_delta": 0.0,
+      "stages": {"photo_correction": "no_change", "light_balance": "accepted", "color_balance": "accepted", "skin_cleanup": "accepted", "facial_features": "no_change", "hair_clothing": "no_change", "background": "no_change", "final_review": "accepted"},
+      "audit": "accept", "proof_verified": true, "model_calls": 0, "rgb_mae": 0.00385981, "luma_mae": 0.00383297
+    },
+    {
+      "id": "case-06", "status": "complete", "dimensions": [1600, 1068], "final_aspect_ratio_delta": 0.0,
+      "stages": {"photo_correction": "no_change", "light_balance": "accepted", "color_balance": "accepted", "skin_cleanup": "accepted", "facial_features": "no_change", "hair_clothing": "no_change", "background": "no_change", "final_review": "accepted"},
+      "audit": "accept", "proof_verified": true, "model_calls": 0, "rgb_mae": 0.010891, "luma_mae": 0.00647623
+    },
+    {
+      "id": "case-07", "status": "complete", "dimensions": [1600, 2949], "final_aspect_ratio_delta": 0.0,
+      "stages": {"photo_correction": "no_change", "light_balance": "accepted", "color_balance": "no_change", "skin_cleanup": "no_change", "facial_features": "no_change", "hair_clothing": "no_change", "background": "no_change", "final_review": "accepted"},
+      "audit": "accept", "proof_verified": true, "model_calls": 0, "rgb_mae": 0.00468444, "luma_mae": 0.00468444
+    },
+    {
+      "id": "case-08", "status": "complete", "dimensions": [1600, 2131], "final_aspect_ratio_delta": 0.0,
+      "stages": {"photo_correction": "no_change", "light_balance": "accepted", "color_balance": "accepted", "skin_cleanup": "no_change", "facial_features": "no_change", "hair_clothing": "no_change", "background": "no_change", "final_review": "accepted"},
+      "audit": "accept", "proof_verified": true, "model_calls": 0, "rgb_mae": 0.00737548, "luma_mae": 0.0058201, "skin_candidate_rejected_and_rolled_back": true
+    },
+    {
+      "id": "case-09", "status": "complete", "dimensions": [1600, 1067], "final_aspect_ratio_delta": 0.0,
+      "stages": {"photo_correction": "no_change", "light_balance": "accepted", "color_balance": "accepted", "skin_cleanup": "accepted", "facial_features": "no_change", "hair_clothing": "no_change", "background": "no_change", "final_review": "accepted"},
+      "audit": "accept", "proof_verified": true, "model_calls": 0, "rgb_mae": 0.00933732, "luma_mae": 0.00888173
+    },
+    {
+      "id": "case-10", "status": "complete", "dimensions": [1600, 2400], "final_aspect_ratio_delta": 0.0,
+      "stages": {"photo_correction": "no_change", "light_balance": "accepted", "color_balance": "accepted", "skin_cleanup": "accepted", "facial_features": "no_change", "hair_clothing": "no_change", "background": "no_change", "final_review": "accepted"},
+      "audit": "accept", "proof_verified": true, "model_calls": 0, "rgb_mae": 0.01012694, "luma_mae": 0.00580165
+    },
+    {
+      "id": "case-11", "status": "complete", "dimensions": [1600, 2400], "final_aspect_ratio_delta": 0.0,
+      "stages": {"photo_correction": "no_change", "light_balance": "accepted", "color_balance": "accepted", "skin_cleanup": "accepted", "facial_features": "no_change", "hair_clothing": "no_change", "background": "no_change", "final_review": "accepted"},
+      "audit": "accept", "proof_verified": true, "model_calls": 0, "rgb_mae": 0.00936987, "luma_mae": 0.00809271
+    },
+    {
+      "id": "case-12", "status": "complete", "dimensions": [1600, 2400], "final_aspect_ratio_delta": 0.0,
+      "stages": {"photo_correction": "no_change", "light_balance": "accepted", "color_balance": "accepted", "skin_cleanup": "accepted", "facial_features": "no_change", "hair_clothing": "no_change", "background": "no_change", "final_review": "accepted"},
+      "audit": "accept", "proof_verified": true, "model_calls": 0, "rgb_mae": 0.00193957, "luma_mae": 0.00195392
+    }
+  ],
+  "publication_safety": {
+    "real_images_in_github_release": false,
+    "run_directories_in_github_release": false,
+    "proof_images_in_github_release": false,
+    "allowed_public_artifacts": ["aggregate validation report", "machine-readable aggregate summary without portraits or sensitive run metadata"]
+  },
+  "release_assessment": "Evidence supports a human-reviewed public beta workflow on this focused sample. It does not support unattended batch acceptance, a generalized 90% success claim, or production-ready labeling."
+}

@@ -1,0 +1,136 @@
+{
+  "schema_version": 6,
+  "pipeline_id": "travel-portrait-v6",
+  "stage_order": [
+    "photo_correction",
+    "light_balance",
+    "color_balance",
+    "skin_cleanup",
+    "facial_features",
+    "hair_clothing",
+    "background",
+    "final_review"
+  ],
+  "execution_policy": {
+    "immutable_original_required": true,
+    "stage_order_is_strict": true,
+    "safe_noop_requires_reason": true,
+    "deterministic_candidate_requires_visual_acceptance": true,
+    "visual_reject_retains_previous_checkpoint": true,
+    "default_model_calls": 0,
+    "maximum_model_calls": 1,
+    "maximum_successful_candidates": 1,
+    "model_chaining_allowed": false,
+    "model_retry_allowed": false,
+    "model_candidate_source": "immutable_original",
+    "accept_tool_completion_as_quality_evidence": false
+  },
+  "mode_policy": {
+    "available_modes": ["natural", "fresh", "warm-film"],
+    "default_mode": "natural",
+    "mode_affected_stages": ["light_balance", "color_balance"],
+    "mode_invariant_stages": [
+      "photo_correction",
+      "skin_cleanup",
+      "facial_features",
+      "hair_clothing",
+      "background",
+      "final_review"
+    ]
+  },
+  "stages": [
+    {
+      "index": 1,
+      "id": "photo_correction",
+      "scope": "whole_image",
+      "purpose": "Inspect orientation, horizon, lens, perspective, crop, and canvas before tonal edits.",
+      "mode_sensitive": false,
+      "safe_noop_allowed": true,
+      "must_preserve": ["identity", "canvas", "crop", "straight_lines", "scene_content"]
+    },
+    {
+      "index": 2,
+      "id": "light_balance",
+      "scope": "whole_image",
+      "purpose": "Balance exposure, highlights, shadows, and subject-to-background luminance.",
+      "mode_sensitive": true,
+      "safe_noop_allowed": true,
+      "must_preserve": ["lighting_direction", "scene_depth", "skin_undertone"]
+    },
+    {
+      "index": 3,
+      "id": "color_balance",
+      "scope": "whole_image",
+      "purpose": "Correct white balance and apply the selected bounded color recipe.",
+      "mode_sensitive": true,
+      "safe_noop_allowed": true,
+      "must_preserve": ["skin_undertone", "neutral_whites", "scene_content"]
+    },
+    {
+      "index": 4,
+      "id": "skin_cleanup",
+      "scope": "skin_only",
+      "purpose": "Reduce temporary blemishes and unevenness while retaining normal texture.",
+      "mode_sensitive": false,
+      "safe_noop_allowed": true,
+      "must_preserve": ["pores", "fine_lines", "permanent_marks", "complexion"]
+    },
+    {
+      "index": 5,
+      "id": "facial_features",
+      "scope": "face_details_only",
+      "purpose": "Apply slight non-geometric definition and under-eye softening.",
+      "mode_sensitive": false,
+      "safe_noop_allowed": true,
+      "must_preserve": ["facial_geometry", "eye_color", "tooth_color", "lip_color", "makeup"]
+    },
+    {
+      "index": 6,
+      "id": "hair_clothing",
+      "scope": "hair_and_clothing_only",
+      "purpose": "Tidy temporary flyaways, lint, and minor clothing distractions.",
+      "mode_sensitive": false,
+      "safe_noop_allowed": true,
+      "must_preserve": ["hairline", "hairstyle", "hair_texture", "garment_design", "body_shape"]
+    },
+    {
+      "index": 7,
+      "id": "background",
+      "scope": "background_only",
+      "purpose": "Reduce minor distractions and maintain visual balance without replacement.",
+      "mode_sensitive": false,
+      "safe_noop_allowed": true,
+      "must_preserve": ["background_identity", "straight_lines", "perspective", "objects", "depth_of_field"]
+    },
+    {
+      "index": 8,
+      "id": "final_review",
+      "scope": "review_only",
+      "purpose": "Compare the final candidate with the immutable original and complete all ten audit gates.",
+      "mode_sensitive": false,
+      "safe_noop_allowed": false,
+      "must_preserve": ["all_prior_stage_locks"],
+      "edits_allowed": false
+    }
+  ],
+  "fallback": {
+    "id": "deterministic-raster-v3",
+    "trigger": "optional model candidate is absent or rejected",
+    "capabilities": ["bounded_light_balance", "texture_safe_skin_cleanup"],
+    "limitations": [
+      "no under-eye edit",
+      "no V6 facial-feature cleanup",
+      "no hair or clothing cleanup",
+      "no background cleanup",
+      "no fresh or warm-film delivery"
+    ],
+    "must_disclose_partial_delivery": true
+  },
+  "references": {
+    "parameters": "model-parameters.json",
+    "stage_contracts": "stage-contracts.md",
+    "audit_gates": "audit-gates.json",
+    "quality_gates": "quality-gates.md",
+    "model_prompts": "model-prompts.md"
+  }
+}

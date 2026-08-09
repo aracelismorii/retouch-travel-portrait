@@ -1,0 +1,117 @@
+{
+  "schema_version": 6,
+  "audit_id": "travel-portrait-v6-final-review",
+  "required_keys": [
+    "skin_texture_natural",
+    "face_neck_color_consistent",
+    "sclera_teeth_not_blue",
+    "lip_saturation_natural",
+    "background_lines_straight",
+    "hair_edges_clean",
+    "subject_background_brightness_cohesive",
+    "zoom_and_thumbnail_coherent",
+    "change_not_excessive_vs_original",
+    "phone_viewing_comfortable"
+  ],
+  "manual_statuses": ["pass", "fail", "not_applicable"],
+  "automatic_statuses": ["pass", "review", "reject", "not_evaluable", "not_applicable"],
+  "not_applicable_requires_note": true,
+  "required_views": ["100_percent", "fit_view", "thumbnail", "phone_normal_brightness"],
+  "minimum_short_edge": 768,
+  "maximum_aspect_ratio_delta": 0.005,
+  "analysis_max_long_edge": 1024,
+  "global_change": {
+    "modes": {
+      "natural": {
+        "review_rgb_mae": 0.1,
+        "reject_rgb_mae": 0.28,
+        "review_luma_mae": 0.08,
+        "reject_luma_mae": 0.24
+      },
+      "fresh": {
+        "review_rgb_mae": 0.14,
+        "reject_rgb_mae": 0.32,
+        "review_luma_mae": 0.11,
+        "reject_luma_mae": 0.27
+      },
+      "warm-film": {
+        "review_rgb_mae": 0.14,
+        "reject_rgb_mae": 0.32,
+        "review_luma_mae": 0.11,
+        "reject_luma_mae": 0.27
+      }
+    }
+  },
+  "multiscale": {
+    "review_luma_correlation": 0.9,
+    "reject_luma_correlation": 0.7,
+    "review_thumbnail_correlation": 0.92,
+    "reject_thumbnail_correlation": 0.75,
+    "review_sharpness_ratio_low": 0.6,
+    "reject_sharpness_ratio_low": 0.2,
+    "review_sharpness_ratio_high": 1.8,
+    "reject_sharpness_ratio_high": 5.0,
+    "minimum_source_sharpness": 0.001
+  },
+  "mobile": {
+    "review_white_clip_increase": 0.02,
+    "reject_white_clip_increase": 0.25,
+    "review_black_clip_increase": 0.03,
+    "reject_black_clip_increase": 0.25,
+    "review_median_luma_shift": 0.12,
+    "reject_median_luma_shift": 0.25
+  },
+  "gates": {
+    "skin_texture_natural": {
+      "question": "Does skin retain normal pores, fine lines, and believable texture?",
+      "view": "100_percent"
+    },
+    "face_neck_color_consistent": {
+      "question": "Are face and neck color and undertone consistent?",
+      "view": "fit_view"
+    },
+    "sclera_teeth_not_blue": {
+      "question": "Are visible sclera and teeth free of blue or cyan whitening?",
+      "view": "100_percent"
+    },
+    "lip_saturation_natural": {
+      "question": "Is lip saturation natural and not excessive?",
+      "view": "100_percent"
+    },
+    "background_lines_straight": {
+      "question": "Do background straight lines remain straight without liquify warping?",
+      "view": "100_percent"
+    },
+    "hair_edges_clean": {
+      "question": "Are hair edges free of smearing, paint-over marks, halos, and cutout edges?",
+      "view": "100_percent"
+    },
+    "subject_background_brightness_cohesive": {
+      "question": "Does subject brightness remain believable relative to the background?",
+      "view": "fit_view"
+    },
+    "zoom_and_thumbnail_coherent": {
+      "question": "Does the image look natural when enlarged and coordinated when reduced?",
+      "view": "100_percent_and_thumbnail"
+    },
+    "change_not_excessive_vs_original": {
+      "question": "Is the cumulative change conservative when compared with the immutable original?",
+      "view": "side_by_side"
+    },
+    "phone_viewing_comfortable": {
+      "question": "Is the image comfortable on a phone at normal brightness without harsh whites, blocked shadows, or excessive saturation?",
+      "view": "phone_normal_brightness"
+    }
+  },
+  "acceptance_policy": {
+    "all_required_keys_present": true,
+    "all_required_views_present": true,
+    "no_failed_gate": true,
+    "not_applicable_requires_invisibility_or_absence": true,
+    "automated_geometry_gate_must_pass": true,
+    "tool_completion_is_not_evidence": true,
+    "decision_when_passed": "accept",
+    "decision_when_failed": "reject",
+    "decision_when_incomplete": "visual_review_required"
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "checks": {
+    "skin_texture_natural": {
+      "status": "replace_with_pass_fail_or_not_applicable",
+      "note": "Describe the 100% texture evidence."
+    },
+    "face_neck_color_consistent": {
+      "status": "replace_with_pass_fail_or_not_applicable",
+      "note": "Describe visible face and neck color consistency."
+    },
+    "sclera_teeth_not_blue": {
+      "status": "replace_with_pass_fail_or_not_applicable",
+      "note": "Describe visible sclera/teeth; use not_applicable with a reason only if neither can be judged."
+    },
+    "lip_saturation_natural": {
+      "status": "replace_with_pass_fail_or_not_applicable",
+      "note": "Describe lip color and edge behavior."
+    },
+    "background_lines_straight": {
+      "status": "replace_with_pass_fail_or_not_applicable",
+      "note": "Describe straight-line and geometry evidence."
+    },
+    "hair_edges_clean": {
+      "status": "replace_with_pass_fail_or_not_applicable",
+      "note": "Describe flyaway, halo, smearing, and edge evidence."
+    },
+    "subject_background_brightness_cohesive": {
+      "status": "replace_with_pass_fail_or_not_applicable",
+      "note": "Describe whether subject and scene lighting remain cohesive."
+    },
+    "zoom_and_thumbnail_coherent": {
+      "status": "replace_with_pass_fail_or_not_applicable",
+      "note": "Describe both 100% and reduced-size evidence."
+    },
+    "change_not_excessive_vs_original": {
+      "status": "replace_with_pass_fail_or_not_applicable",
+      "note": "Describe the side-by-side and difference-heatmap evidence."
+    },
+    "phone_viewing_comfortable": {
+      "status": "replace_with_pass_fail_or_not_applicable",
+      "note": "Describe the normal-brightness phone preview."
+    }
+  }
+}

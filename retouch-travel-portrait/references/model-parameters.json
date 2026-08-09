@@ -1,0 +1,211 @@
+{
+  "schema_version": 6,
+  "preset_name": "travel-portrait-v6",
+  "default_mode": "natural",
+  "stage_order": [
+    "photo_correction",
+    "light_balance",
+    "color_balance",
+    "skin_cleanup",
+    "facial_features",
+    "hair_clothing",
+    "background",
+    "final_review"
+  ],
+  "engine": {
+    "default": "deterministic-raster-v6",
+    "optional": "built-in-image-editing-model",
+    "default_model_calls": 0,
+    "maximum_model_calls": 1,
+    "maximum_successful_candidates": 1,
+    "model_chaining_allowed": false,
+    "model_retry_allowed": false,
+    "fallback": "deterministic-raster-v3"
+  },
+  "mode_policy": {
+    "affected_stages": ["light_balance", "color_balance"],
+    "shared_default_stages": [
+      "photo_correction",
+      "skin_cleanup",
+      "facial_features",
+      "hair_clothing",
+      "background"
+    ]
+  },
+  "semantic_parameter_policy": {
+    "stages": ["facial_features", "hair_clothing", "background"],
+    "active_only_when_optional_model_is_enabled": true,
+    "default_zero_model_action": "inspect_and_record_safe_no_change"
+  },
+  "modes": {
+    "natural": {
+      "preset_name": "natural-v6",
+      "display_name": "Natural / 自然",
+      "description": "Neutral correction that preserves the original scene mood.",
+      "stage_recipes": {
+        "light_balance": {
+          "lighting_improvement": 0.25
+        },
+        "color_balance": {
+          "white_balance_correction": 0.18,
+          "style_strength": 0.0,
+          "instruction": "Preserve the original neutral color character and scene mood."
+        }
+      }
+    },
+    "fresh": {
+      "preset_name": "fresh-v6",
+      "display_name": "Fresh / 清透",
+      "description": "Clean airy tone with restrained neutral separation.",
+      "stage_recipes": {
+        "light_balance": {
+          "lighting_improvement": 0.32
+        },
+        "color_balance": {
+          "white_balance_correction": 0.22,
+          "style_strength": 0.18,
+          "instruction": "Gently lift midtones and clean neutral separation without whitening skin or washing the background pastel."
+        }
+      }
+    },
+    "warm-film": {
+      "preset_name": "warm-film-v6",
+      "display_name": "Warm Film / 暖调胶片",
+      "description": "Mild warm highlights, muted saturation, and soft contrast.",
+      "stage_recipes": {
+        "light_balance": {
+          "lighting_improvement": 0.24
+        },
+        "color_balance": {
+          "white_balance_correction": 0.2,
+          "style_strength": 0.2,
+          "instruction": "Use mild warm highlights, slightly muted saturation, and soft contrast without orange skin, teal-orange grading, crushed blacks, or fake film damage."
+        }
+      }
+    }
+  },
+  "shared_parameter_defaults": {
+    "photo_correction": 0.0,
+    "skin_smoothing": 0.28,
+    "blemish_reduction": 0.3,
+    "skin_tone_evenness": 0.25,
+    "under_eye_reduction": 0.0,
+    "feature_definition": 0.0,
+    "hair_cleanup": 0.0,
+    "clothing_cleanup": 0.0,
+    "background_balance": 0.0,
+    "background_cleanup": 0.0
+  },
+  "parameters": {
+    "photo_correction": {
+      "stage": "photo_correction",
+      "default": 0.0,
+      "minimum": 0.0,
+      "maximum": 0.0,
+      "target": "inspection only in the V6 MVP; preserve geometry and record a safe no-change"
+    },
+    "lighting_improvement": {
+      "stage": "light_balance",
+      "default": 0.25,
+      "minimum": 0.0,
+      "maximum": 0.5,
+      "target": "whole-image exposure, highlight, shadow, and subject-background luminance balance"
+    },
+    "white_balance_correction": {
+      "stage": "color_balance",
+      "default": 0.18,
+      "minimum": 0.0,
+      "maximum": 0.4,
+      "target": "neutral white balance without changing skin undertone"
+    },
+    "style_strength": {
+      "stage": "color_balance",
+      "default": 0.0,
+      "minimum": 0.0,
+      "maximum": 0.3,
+      "target": "bounded selected-mode color treatment"
+    },
+    "skin_smoothing": {
+      "stage": "skin_cleanup",
+      "default": 0.28,
+      "minimum": 0.0,
+      "maximum": 0.5,
+      "target": "texture-preserving smoothing while retaining pores and fine lines"
+    },
+    "blemish_reduction": {
+      "stage": "skin_cleanup",
+      "default": 0.3,
+      "minimum": 0.0,
+      "maximum": 0.5,
+      "target": "temporary blemishes and temporary redness only"
+    },
+    "skin_tone_evenness": {
+      "stage": "skin_cleanup",
+      "default": 0.25,
+      "minimum": 0.0,
+      "maximum": 0.45,
+      "target": "small patchy tone variation without changing complexion or undertone"
+    },
+    "under_eye_reduction": {
+      "stage": "facial_features",
+      "default": 0.0,
+      "minimum": 0.0,
+      "maximum": 0.25,
+      "target": "slight under-eye shadow softening without erasing anatomy"
+    },
+    "feature_definition": {
+      "stage": "facial_features",
+      "default": 0.0,
+      "minimum": 0.0,
+      "maximum": 0.2,
+      "target": "slight non-geometric facial-feature definition without color or makeup changes"
+    },
+    "hair_cleanup": {
+      "stage": "hair_clothing",
+      "default": 0.0,
+      "minimum": 0.0,
+      "maximum": 0.2,
+      "target": "isolated temporary flyaway cleanup without changing hairline, style, volume, or texture"
+    },
+    "clothing_cleanup": {
+      "stage": "hair_clothing",
+      "default": 0.0,
+      "minimum": 0.0,
+      "maximum": 0.2,
+      "target": "small lint and temporary clothing distraction cleanup without changing garment design"
+    },
+    "background_balance": {
+      "stage": "background",
+      "default": 0.0,
+      "minimum": 0.0,
+      "maximum": 0.2,
+      "target": "subtle background luminance cohesion without detaching the subject"
+    },
+    "background_cleanup": {
+      "stage": "background",
+      "default": 0.0,
+      "minimum": 0.0,
+      "maximum": 0.15,
+      "target": "minor explicitly requested distraction cleanup without replacement or object invention"
+    }
+  },
+  "candidate_gates": {
+    "relative_aspect_ratio_delta_max": 0.005,
+    "minimum_short_edge": 768,
+    "require_visual_identity_review": true,
+    "require_all_ten_audit_keys": true,
+    "audit_contract": "audit-gates.json"
+  },
+  "fallback": {
+    "id": "deterministic-raster-v3",
+    "partial_delivery_only": true,
+    "supported_stages": ["light_balance", "skin_cleanup"],
+    "unsupported_stages": [
+      "photo_correction",
+      "color_balance",
+      "facial_features",
+      "hair_clothing",
+      "background"
+    ]
+  }
+}

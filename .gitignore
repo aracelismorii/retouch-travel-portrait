@@ -1,0 +1,63 @@
+# Operating-system and editor files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*~
+
+# Python caches and virtual environments
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+
+# Test, coverage, and type-checker output
+.coverage
+.coverage.*
+htmlcov/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.tox/
+
+# Build and packaging output
+build/
+dist/
+*.egg-info/
+
+# Local secrets and logs
+.env
+.env.*
+!.env.example
+*.log
+
+# Local retouch runs and release assembly work
+/outputs/
+/runs/
+/work/
+
+# Sensitive portrait inputs and generated review artifacts
+*.jpg
+*.jpeg
+*.png
+*.webp
+*.gif
+*.bmp
+*.tif
+*.tiff
+*.heic
+*.heif
+*.avif
+*.svg
+**/checkpoints/
+**/candidates/
+**/proof/
+**/run.json
+**/queue.json
+**/manual-review.json
+**/audit.json
+**/*.review.json
+**/.pipeline.lock
